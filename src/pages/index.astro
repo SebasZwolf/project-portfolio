@@ -305,16 +305,13 @@ let c = 0;
 
 					transition: background-color .3s, border-color .3s;
 				}
+				
 				& > li:hover {
-					& {
-						background-color: var(--icon-color);
-						border-color: var(--panel-color);
-					}
-
-					& > svg {
-						filter: invert(1);
-					}
+					background-color: var(--icon-color);
+					border-color: var(--panel-color);
 				}
+				& > li:hover > svg { filter: invert(1); }
+				
 			}
 
 			&:hover .c-sec-links {
