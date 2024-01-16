@@ -1,0 +1,517 @@
+---
+import { screen_themes } from '../util/constants'
+
+type link = {
+	label: string;
+	href?: string;
+	nested? : [link, ...link[]];
+};
+
+const home_links: link[] = [
+	{
+		label : 'Experiencia',
+		href : '#experiencia',
+	},
+	{
+		label : 'Proyectos',
+		href : '#proyectos',
+	},
+	{
+		label : 'Sobre mí',
+		href : '#sobre-mi',
+	},
+	{
+		label : 'nested',
+		nested : [
+			{
+				label : 'nested',
+				href : '#',
+			},
+			{
+				label : 'nested',
+				nested : [
+					{
+						label : 'nested',
+						href : '#',
+					},
+					{
+						label : 'nested',
+						href : '#',
+					},
+					{
+						label : 'nested',
+						href : '#',
+					}
+				]
+			},
+			{
+				label : 'nested',
+				nested : [
+					{
+						label : 'nested',
+						href : '#',
+					},
+					{
+						label : 'nested',
+						href : '#',
+					}
+				]
+			}
+		]
+	}
+];
+
+export type Props = {
+	header_size: string;
+};
+
+const { header_size } = Astro.props;
+
+---
+
+<header class="c-gen-header" style={`--hsize : ${header_size}`} >
+	<div class="c-gen-starry_night h-[50vh] mb-[-50vh] hidden dark:block">
+		<svg
+			width="100%"
+			height="100%"
+			xmlns="http://www.w3.org/2000/svg"
+		>
+			<defs>
+				<pattern
+					id="a"
+					patternUnits="userSpaceOnUse"
+					width="25"
+					height="25"
+					patternTransform="scale(4) rotate(0)"
+				>
+					<path
+						d="M25 30a5 5 0 110-10 5 5 0 010 10zm0-25a5 5 0 110-10 5 5 0 010 10zM0 30a5 5 0 110-10 5 5 0 010 10zM0 5A5 5 0 110-5 5 5 0 010 5zm12.5 12.5a5 5 0 110-10 5 5 0 010 10z"
+						stroke-width="1"
+						stroke="none"
+						fill="var(--bg-header-color)"></path>
+					<path
+						d="M0 15a2.5 2.5 0 110-5 2.5 2.5 0 010 5zm25 0a2.5 2.5 0 110-5 2.5 2.5 0 010 5zM12.5 2.5a2.5 2.5 0 110-5 2.5 2.5 0 010 5zm0 25a2.5 2.5 0 110-5 2.5 2.5 0 010 5z"
+						stroke-width="1"
+						stroke="none"
+						fill="var(--bg-header-color)"></path>
+				</pattern>
+				<radialGradient id="comment-gradient" cx="0" cy=".5" r=".5">
+					<stop offset="0%" stop-color="rgba(255,255,255,.8)"></stop>
+					<stop offset="100%" stop-color="rgba(255,255,255,0)"></stop>
+				</radialGradient>
+			</defs>
+
+			<rect style="animation: slide-left 30s linear 0s infinite normal none; filter: blur(6px)"
+				width="200%"
+				height="100%"
+				fill="url(#a)">
+			</rect>
+			<g style="animation: moon-orbit 30s ease-in-out -6s infinite normal none;"
+			>
+				<g style="translate: 0 25%; scale : .2">
+					<circle r="96" cx="0" y="0" fill="#dddf" style="filter : blur(96px)"
+					></circle>
+					<circle r="96" cx="0" y="0" fill="#ddda" style="filter : blur(4px)"
+					></circle>
+					<circle r="96" cx="0" y="0" fill="#ddda" style="filter : blur(1px)"
+					></circle>
+					<circle r="96" cx="0" y="0" fill="#dddf" style="filter : blur(0px)"
+					></circle>
+
+					<g style="opacity: .5">
+						<circle r="10" cx="-48" cy="-48" fill="#aabf"></circle>
+						<circle r="16" cx="64" cy="32" fill="#aabf"></circle>
+						<circle r="24" cx="28" cy="60" fill="#aabf"></circle>
+						<circle r="16" cx="0" cy="70" fill="#aabf"></circle>
+					</g>
+				</g>
+			</g>
+			{Array.from(Array(3).keys(), (i) => (
+				<g style={`rotate : ${-135 + 155 * i}deg; translate : ${15 + i * 35}% 50%;`}>
+					<ellipse style={`animation: comet 7s ease-out ${i * -4}s infinite normal none;`} 
+						rx="150" ry="2" cx="0" cy="0" fill="url('#comment-gradient')"/>
+				</g>
+			))}
+		</svg>
+	</div>
+	<div class="c-gen-sunny_day h-[75vh] mb-[-75vh] block dark:hidden">
+		<svg
+			width="100%"
+			height="100%"
+			xmlns="http://www.w3.org/2000/svg">
+			<defs>
+				<radialGradient id="sun-gradient" cx=".5" cy=".45" r="1">
+					<stop offset="002%" stop-color="#fff"></stop>
+					<stop offset="050%" stop-color="#fd1"></stop>
+					<stop offset="090%" stop-color="#f81"></stop>
+				</radialGradient>
+				<radialGradient id="sunshine-gradient" cx=".5" cy=".45" r="1">
+					<stop offset="002%" stop-color="transparent"></stop>
+					<stop offset="05%" stop-color="#fd18"></stop>
+					<stop offset="100%" stop-color="#f81"></stop>
+				</radialGradient>
+			</defs>
+
+			<g style="animation: sun-orbit 120s linear -32s infinite normal none;">
+				<g style="translate: 0 10%;">
+					<circle cx="0" cy="0" r="32" fill="url('#sun-gradient')"
+					style="scale: 1.5; filter:blur(32px)"/>
+					<circle cx="0" cy="0" r="32" fill="url('#sunshine-gradient')" 
+					style="animation: sun-shine 6s ease-in-out 0s infinite normal none; filter:blur(0px); transform: scale(2)"/>
+					<circle cx="0" cy="0" r="32" fill="url('#sunshine-gradient')" 
+					style="animation: sun-shine 6s ease-in-out -.25s infinite normal none; filter:blur(0px); transform: scale(1.5)"/>
+					<circle cx="0" cy="0" r="32" fill="url('#sun-gradient')" stroke="#f83"
+					style="filter:blur(1px)"/>
+					<circle cx="0" cy="0" r="32" fill="white"
+					style="scale: 1.5; filter:blur(8px); opacity: .65;"/>
+				</g>
+			</g>
+		</svg>
+	</div>
+
+	<div class="frame">
+		<section
+			class="c-gen-banner grid place-items-center"
+			class:list={[!header_size && "hidden"]}
+		>
+			<slot name="header" />
+		</section>
+		<hr
+			class="mx-auto w-3/4 border-none bg-transparent h-0.5 -mt-0.5 hidden dark:block"
+			style="background-image: linear-gradient(to right, transparent, var(--tx-header-color), var(--tx-header-color), transparent)"
+		/>
+		<nav class="c-gen-nav">
+			<div>
+				<label class="c-gen-nav-toggler">
+					<input type="checkbox" aria-hidden="true" class="sr-only"/>	
+					<svg class="c-tool-icon" data-toggle="open" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 6l16 0" /><path d="M4 12l16 0" /><path d="M4 18l16 0" /></svg>
+					<svg class="c-tool-icon" data-toggle="shut" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M18 6l-12 12" /><path d="M6 6l12 12" /></svg>
+				</label>
+
+				<div class="c-gen-frame-links">
+					{
+						(function() {
+							function renderlinks( l : link[], level = 0 ) {
+								return <ul class="c-ul-link" data-level={ level }>
+									{l.map(e => e.nested ?
+										(<li class="relative">
+											<label >
+												<input
+												
+													type="checkbox" name={`level-${level}`}
+													class="sr-only" aria-hidden="true"/>			
+												<span class="c-tool-icon" data-toggle="open" role="img">{e.label} &#8801;</span>
+												<span class="c-tool-icon" data-toggle="shut" role="img">{e.label} &#215;</span>
+											</label>
+											{renderlinks(e.nested, level + 1)}
+										</li>) :
+										(<li><a href={e.href}> {e.label} </a></li>) 
+									)}
+									
+									<script is:inline define:vars={{ level, luis : 'juan' }}>
+										document.scripts[document.scripts.length - 1].parentElement.querySelectorAll(`input[name="level-${level}"]`).forEach(i => i.addEventListener('click', function({ target : e}) {
+											for (const i of e.closest('ul').querySelectorAll(`input`)) 
+												if(i !== e) 
+													i.checked = false;
+										}));
+									</script>
+								</ul>
+							}
+							return renderlinks(home_links)
+						})()
+					}
+				</div>
+
+				<button class="c-gen-theme-toggler">
+					<span class="dark:hidden inline-block">🌘</span>
+					<span class="hidden dark:inline-block">☀️</span>
+					<script is:inline define:vars={{ e_th : screen_themes }}>
+						document.scripts[document.scripts.length - 1].parentElement.addEventListener("click", () => localStorage.setItem("theme", document.documentElement.classList.toggle("dark") ? e_th.d : e_th.l));
+					</script>
+				</button>
+			</div>
+		</nav>
+	</div>
+</header>
+
+<style is:global>
+	html:not(.dark) .c-gen-header {		
+		--tx-header-color: theme(colors.slate.900);
+		--ct-header-color: var(--panel-color);
+		--bg-header-color: theme(colors.sky.500);
+	}
+	html.dark .c-gen-header {
+		--tx-header-color: theme(colors.slate.400);
+		--ct-header-color: theme(colors.slate.700);
+		--bg-header-color: var(--panel-color);
+	}
+
+	.c-gen-header {
+		& {
+			position: sticky;
+			line-height: 1;
+			z-index: 10;
+
+			margin-bottom: 4rem;
+
+			top: calc(var(--hsize, 0) * -1 - 1rem);
+
+			background-color: var(--bg-header-color);
+
+			box-shadow: 0 -1.25rem 2rem 1rem #3446;
+		}
+
+		& > div.frame {
+			position: relative;
+
+			background-image: linear-gradient(
+				to bottom,
+				transparent 4rem,
+				var(--ct-header-color) calc(100vh - 4rem)
+			);
+			background-attachment: fixed;
+		}
+	}
+
+	.c-gen-banner {
+		height: var(--hsize, 0);
+		overflow: clip;
+	}
+
+	.c-gen-nav {
+		& {
+			@apply h-16 flex flex-col justify-center;
+		}
+
+		& > div {
+			@apply px-6 flex h-12 gap-2 items-stretch justify-center sticky top-0;
+			color: var(--tx-header-color);
+		}
+
+		@media (width <= 768px) {
+			& > div { justify-content: flex-end; }
+		}
+
+		& ul.c-ul-link { 
+			& {
+				display: flex;
+				flex-direction: column;
+
+				line-height: 1;
+				
+				background-color: #6663;
+				color: var(--hierarchy-1);
+
+				--emphasis : #46f8;
+			}
+
+			& a, label {
+				& {
+					display: block;
+					height: 100%;
+					
+					padding: .5rem 1.25rem;
+					cursor: pointer;
+
+					transition: 
+						background-color .1s,
+						color .1s;
+				}
+
+				&:hover, &:focus-within { 
+					background-color: #89d8;
+					color : var(--hierarchy-0);
+					transition: 
+						background-color .3s,
+						color .3s;
+				}
+				&:focus-within { outline: medium auto; }
+			}
+
+			& label:has(+ ul.c-ul-link):has(> input:where([type="checkbox"],[type="radio"]):not(:checked)) {
+				& {}
+				& > .c-tool-icon[data-toggle="shut"] { display: none; }
+				& + ul.c-ul-link { display: none; }
+			}
+			& label:has(+ ul.c-ul-link):has(> input:where([type="checkbox"],[type="radio"]):checked) {
+				& { background-color: var(--emphasis); }
+				& > .c-tool-icon[data-toggle="open"] { display: none; }
+			}
+		}
+
+		& .c-gen-theme-toggler { 
+			@apply aspect-square leading-none self-center border-2 rounded-full flex items-center justify-center;
+
+			width: 34px;
+			border-color: var(--hierarchy-2);
+			background-color: #6676
+		}
+
+		& .c-gen-nav-toggler {
+			& {
+				@apply aspect-square leading-none self-center px-2 border-2 rounded-md flex items-center;
+				border-color: var(--hierarchy-2);
+				background-color: #6676;
+			}
+			&:has(> input[type="checkbox"]:not(:checked)) {
+				& > .c-tool-icon[data-toggle="shut"] { display: none; }
+			}
+			&:has(> input[type="checkbox"]:checked) {
+				& > .c-tool-icon[data-toggle="open"] { display: none; }
+			}
+
+			@media (width <= 798px) {
+				& { order: 1; }
+				&:has(> input[type="checkbox"]:not(:checked)) + .c-gen-frame-links { display: none; }
+			}
+			
+			@media (width > 798px) {
+				& { display: none; }
+			}
+		}
+
+		& div.c-gen-frame-links {
+			& { display: contents; }
+
+			@media (width <= 768px) {
+				& > ul.c-ul-link {
+					min-width: 12rem;
+					position: absolute;
+					top : calc(100% + 1rem);
+					right: 1rem;
+
+					border-radius: .5rem;
+					background-color: var(--panel-color);
+					border: 1px solid currentColor;
+					padding: .5rem 0;
+				}
+			}
+
+			@media (width > 768px) {
+				& > ul.c-ul-link {
+					background-color: var(--panel-color);
+					flex-direction: row;
+					background-color: transparent;
+				}
+				& > ul.c-ul-link > li > :where(a, label) {
+					padding-block: 0;
+					display: flex;
+					align-items: center;
+					gap : 2px;
+				}
+				& > ul.c-ul-link > li > ul.c-ul-link  {
+					position: absolute;
+					min-width: 12rem;
+
+					top : calc(100% + 1rem);
+					left : 50%;
+					translate : -50% 0;
+
+					width: max-content;
+
+					border-radius: .5rem;
+					background-color: var(--panel-color);
+					border: 1px solid currentColor;
+					padding: .5rem 0;
+				}
+			}
+		}
+	}
+
+	.c-gen-nav { background-color: var(--panel-color); }
+	html.dark .c-gen-nav { background-color: transparent; }
+</style>
+
+<style data-name="stars-background" is:global>
+.c-gen-header .c-gen-starry_night {
+	background-image: url("/stars.png");
+	background-repeat: repeat-x;
+	background-size: 50% auto;
+	animation: bg-slide-left 60s linear 0s infinite normal none;
+}
+	@keyframes bg-slide-left {
+		to {
+			background-position-x: 100%;
+		}
+	}
+	@keyframes slide-left {
+		from {
+			transform: translate(0%, 0);
+		}
+		to {
+			transform: translate(-50%, 0);
+		}
+	}
+	@keyframes moon-orbit {
+		0%,
+		12% {
+			translate: 95% 0%;
+			rotate: -0.35turn;
+			scale: 0.75;
+		}
+		50% {
+			scale: 1.15;
+		}
+		88%,
+		100% {
+			translate: 5% 0%;
+			rotate: 0.35turn;
+			scale: 0.75;
+		}
+	}
+	@keyframes comet {
+		0%,
+		42% {
+			translate: 50% 0;
+			opacity: 0;
+		}
+		50% {
+			opacity: 1;
+		}
+		58%,
+		100% {
+			translate: -50% 0;
+			opacity: 0;
+		}
+	}
+</style>
+
+<style data-name="sunny-background">
+.c-gen-header .c-gen-sunny_day {			
+	& {
+		--mask : linear-gradient(to top, transparent, black 50%);
+		mask-image: var(--mask);
+		-webkit-mask-image: var(--mask);
+	}
+
+}
+@keyframes sun-orbit {
+	0%,
+	12% {
+		translate: -5% 35%;
+		rotate: .25turn;
+	}
+	50% {
+		translate: 50% 35%;
+	}
+	88%,
+	100% {
+		translate: 105% 35%;
+		rotate: .75turn;
+	}
+}
+
+@keyframes sun-shine {
+	0% {
+		scale : .0;
+		opacity: 0;
+	}
+	30% {
+		opacity: .35;
+	}
+	60%, 100% {
+		scale : 1.5;
+		opacity: 0;
+	}
+}
+</style>

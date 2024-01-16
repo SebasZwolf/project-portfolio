@@ -2,28 +2,351 @@
 import Layout from "../layouts/Layout.astro";
 import Grid from "../layouts/Grid.astro";
 
-import photo from "../assets/creator/photo.png";
-import { Image } from "astro:assets";
+import { TimeLine } from "../components/react";
+
+const s = [
+	{ id : 'experiencia', label : 'Experiencia Laboral' },
+	{ id : 'proyectos', label : 'Mis Proyectos' },
+	{ id : 'sobre-mi', label : 'Sobre mí' },
+] satisfies Record<number, { id : string, label : string}>
+
+import BondCalcImg from '../assets/projects/bondCalculator.png'
+import { getImage } from "astro:assets";
+
+const projects : Array<{
+	title : string,
+	descr : string,
+	link? : string,
+	repo? : string,
+	img : string,
+	tags : (keyof typeof icons)[],
+}> = [
+	{
+		title : 'Aplicación de análisis de bonos',
+		descr : 'Creado como un proyecto universitario, esta aplicación permite al usuario comprar la rentabilidad de multiples bonos. Debido a cambios en la politica de uso de proveedores cloud, los servicios que requieren iniciar sesion ya no estan disponibles.',
+		link : 'https://sebaszwolf.github.io/calculator',
+		//repo : 'https://github.com/SebasZwolf/SebasZwolf.github.io',
+		img : await getImage({
+			src : BondCalcImg,
+			format : 'webp',
+		}).then(e => e.src),
+		tags : ['vue'],
+	}
+];
+
+const icons = {
+	vue : {
+		icon : 'vue',
+		label : 'Vue.js',
+		color : '#42b883',
+	},
+} as const satisfies Record<string, { icon: string, label: string, color: string }> ;
+
+let c = 0;
+
 ---
 
 <Layout
 	title="Portafolio de Sebastian - Ingeniero de Sistemas y Desarrollador Web"
+	description="Hola soy Sebastian y este es mi portafolio. Mira mis proyectos realizados usando CSS,JS y HTML y diferentes tecnologías como Vue, Astro, React, Tailwind, entre otros."
 >
 	<Grid>
-		<Fragment>
-			<div>
-				<p>
-					Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt minus
-					perspiciatis, mollitia sint consectetur quas reprehenderit beatae nemo
-					molestiae error temporibus, recusandae cum assumenda adipisci
-					blanditiis dolore natus odio! Aliquam.
-				</p>
-			</div>
-			<div>
+		<Fragment slot="header">
+			<article
+				class="border-blue-400 p-2 flex flex-col items-center gap-2 max-w-2xl b mx-auto"
+			>
+				<header class="text-center my-3">
+					<picture>
+						<img
+							class="w-24 block mx-auto my-2 rounded-full overflow-clip border-2 border-opacity-50 border-white p-1"
+							src={"https://unavatar.io/unknown"}
+							width="112"
+							height="112"
+							alt="avatar del desarrollador"
+						/>
+					</picture>
+					<h2 class="m-0 text-xl font-semibold leading-tight">
+						<span> hola, soy</span>
+						<span class="text-2xl font-bold"> Sebastian</span>
+					</h2>
+					<p class="text-sm m-0 leading-tight text-[var(--hierarchy-1)]">
+						Ingeniero de Sistemas y Desarrollador Web
+					</p>
+				</header>
+				<div class="basis-full leading-snug text-base text-center text-balance">
+					<p class="my-1">
+						Entusiasta del desarrollo web, el diseño UX y las aplicaciones web.
+					</p>
+					<p class="my-1">
+						Me especializo en el diseño y desarrollo de aplicaciones y experiencias únicas, llamativas y profesionales. 
+					</p>
+				</div>
+			</article>
+		</Fragment>
 
-			</div>
+		<Fragment slot="default">
+			<svg viewBox="0 0 24 24" class="hidden">
+				<defs>
+					<g id={`c-icon-tag-${icons.vue.icon}`} stroke-width="2" fill="none">
+						<path d="M16.5 4l-4.5 8l-4.5 -8" />
+						<path d="M3 4l9 16l9 -16" />
+					</g>
+				</defs>
+				<defs>
+					<g id={`c-icon-header-${s[c++].id}`}
+						stroke-width="0"
+						stroke="none"
+						fill="currentColor"
+						stroke-linecap="round"
+						stroke-linejoin="round">
+						<path d="M22 13.478v4.522a3 3 0 0 1 -3 3h-14a3 3 0 0 1 -3 -3v-4.522l.553 .277a20.999 20.999 0 0 0 18.897 -.002l.55 -.275zm-8 -11.478a3 3 0 0 1 3 3v1h2a3 3 0 0 1 3 3v2.242l-1.447 .724a19.002 19.002 0 0 1 -16.726 .186l-.647 -.32l-1.18 -.59v-2.242a3 3 0 0 1 3 -3h2v-1a3 3 0 0 1 3 -3h4zm-2 8a1 1 0 0 0 -1 1a1 1 0 1 0 2 .01c0 -.562 -.448 -1.01 -1 -1.01zm2 -6h-4a1 1 0 0 0 -1 1v1h6v-1a1 1 0 0 0 -1 -1z"/>
+					</g>
+					<g id={`c-icon-header-${s[c++].id}`}
+						stroke-width="2"
+						stroke="currentColor"
+						fill="none"
+						stroke-linecap="round"
+						stroke-linejoin="round">
+						<path d="M3 12h1m8 -9v1m8 8h1m-15.4 -6.4l.7 .7m12.1 -.7l-.7 .7" />
+						<path d="M9 16a5 5 0 1 1 6 0a3.5 3.5 0 0 0 -1 3a2 2 0 0 1 -4 0a3.5 3.5 0 0 0 -1 -3" />
+						<path d="M9.7 17l4.6 0" />
+					</g>
+					<g id={`c-icon-header-${s[c++].id}`}
+						stroke-width="2"
+						stroke="currentColor"
+						fill="none"
+						stroke-linecap="round"
+						stroke-linejoin="round">
+						<path d="M12 2a5 5 0 1 1 -5 5l.005 -.217a5 5 0 0 1 4.995 -4.783z" stroke-width="0" fill="currentColor" />
+						<path d="M14 14a5 5 0 0 1 5 5v1a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2v-1a5 5 0 0 1 5 -5h4z" stroke-width="0" fill="currentColor" />
+					</g>
+				</defs>
+			</svg>
+
+			<section class="my-12 px-2">
+				<h2 id={s[(c = 0)].id} class="text-2xl block my-4 font-semibold leading-none">
+					<svg
+						class="inline-block size-7"
+						style="vertical-align: -5px;"
+						viewBox="0 0 24 24">
+						<use href={`#c-icon-header-${s[c].id}`}/>
+					</svg>
+					{ s[c++].label }
+				</h2>
+				
+				<div class="mr-auto max-w-3xl pl-3">
+					<TimeLine
+						className="c-timeline-experience"
+						title={{ level : 3}}
+						list={[
+							{
+								date: new Date("2023-9"),
+								title: "Human Habitat Peru",
+								content: [
+									"Diseño, puesta en marcha y mantenimiento de sitio web de Human Habitat Perú.",
+									"Se desarrolló una landing page que cumple con estandares de SEO y buenas practicas, un blog y sistema de contacto. Además, se diseño una base de datos estructurada local."
+								],
+								link: "https://hhpbim.com",
+							}
+						]}
+					/>
+				</div>
+			</section>
+			<section class="my-12 px-2">
+				<h2 id={s[c].id} class="text-2xl block my-4 font-semibold leading-none">
+					<svg
+						class="inline-block size-7"
+						style="vertical-align: -5px;"
+						viewBox="0 0 24 24">
+						<use href={`#c-icon-header-${s[c].id}`}/>
+					</svg>
+					{ s[c++].label }
+				</h2>
+				<ul class="c-ul-project-list">{
+					projects.map(p => (<li class="">
+						<article>
+
+							<div class="rounded-t-md overflow-clip aspect-square relative">
+								<div class="c-sec-links">
+									{ p.link && <a target="_blank" href={p.link}>
+										<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-external-link" width="20" height="20" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 6h-6a2 2 0 0 0 -2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-6" /><path d="M11 13l9 -9" /><path d="M15 4h5v5" />
+											</svg>
+										</a>	}
+									{ p.repo && <a target="_blank" href={p.repo}>
+										<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="20" height="20" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+											</svg>
+										</a>	}
+								</div>
+								<img class="block h-full object-cover min-w-full" src={p.img} alt={`captura/imagen de la aplicación/proyecto ${p.title}`}/>
+							</div>
+
+							
+							<div class="leading-none">
+								<h3 class="text-2xl font-semifold my-4">{p.title}</h3>
+								
+								<div class="collapsible">
+									<div>
+										<p class="mb-2 leading-snug">{p.descr}</p>
+									</div>
+								</div>
+								
+								<ul class="c-ul-project-tags">{p.tags.map(t => icons[t]).map(t =>
+									(<li class="block" style={`--icon-color: ${t.color}`}>
+										<svg width="24" height="24" >
+											<title>{t.label}</title>
+											<use href={`#c-icon-tag-${t.icon}`}/>
+										</svg>
+									</li>)
+								)}</ul>
+							</div>
+						</article>
+					</li>))
+				}</ul>
+			</section>
+			<section class="my-12" data-col="total">
+				<div class="max-w-[var(--max-width)] mx-auto">
+					<h2 id={s[c].id } class="text-2xl block my-4 font-semibold leading-none">
+						<svg
+							class="inline-block size-7"
+							style="vertical-align: -5px;"
+							viewBox="0 0 24 24">
+							<use href={`#c-icon-header-${s[c].id}`}/>
+						</svg>
+						{ s[c++].label }
+					</h2>
+				</div>
+				<div class="my-12 bg-[var(--panel-color)] px-2" style="box-shadow: 0 .125rem .75rem 0rem #4446" >
+					<div
+						class="max-w-[var(--max-width)] py-2 flex mx-auto items-center gap-4 flex-col mt-32 md:mt-0 md:flex-row">
+						<picture class="contents">
+							<img
+								class="md:scale-150 w-32 -mt-20  md:my-0 md:mx-8 block rounded-full overflow-clip border-2 border-[var(--hierarchy-2)] dark:border-white"
+								src={"https://unavatar.io/unknown"}
+								width="112"
+								height="112"
+								alt="avatar del desarrollador"
+							/>
+						</picture>
+
+						<div class="max-w-2xl text-hierarchy-1" >
+							<p class="my-2">
+								Soy un Ingeniero de Sistemas que disfruta del proceso de diseño y producción de aplicaciones y diseños para la web. 
+								Considero que cada idea es una oportunidad para expandir y crear experiencias únicas y memorables.
+							</p>
+							<p class="my-2">
+								Mis principios de diseño son tanto la apariencia y expresividad como la accesibilidad y usabilidad.
+							</p>
+						</div>
+
+					</div>
+				</div>
+			</section>
+			<div class="mb-64"></div>
 		</Fragment>
 	</Grid>
 </Layout>
 
-<style></style>
+<style is:global>
+	.c-timeline-experience {
+		& {}
+
+		& li[data-index="0"] .title { 
+			background-image : linear-gradient(to bottom right,#5193ca,#27B887);
+			background-clip: text;
+			color: transparent;
+		}
+	}
+	.c-ul-project-list {
+		& {
+			@apply grid grid-flow-row grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-2;
+		}
+
+		& > li > article {
+			& {
+				@apply p-2 rounded-xl flex flex-col relative;
+				
+				--bg-card-project : var(--hierarchy-3);
+				background-color: var(--bg-card-project);
+				height: 30rem;
+				overflow: clip;
+
+				box-shadow: 0 .5rem 1.5rem -.5rem #0006;
+			}
+			& > div { overflow: hidden; }
+			& > div:first-child { flex: 0 1 100%; }
+			& > div:last-child  { flex: 1 0 auto; }
+
+			& div.collapsible  { 
+				& {
+					display: grid;
+					grid-template-rows: 0fr;
+					transition: grid-template-rows .3s;
+				}
+				& > div:only-child { 
+					overflow: hidden;
+				}
+			}
+
+			&:hover div.collapsible  { 
+				grid-template-rows: 1fr;
+			}
+
+			& .c-ul-project-tags {
+				& {
+					@apply flex flex-row flex-nowrap gap-2 items-start justify-end;
+				}
+
+				& > li {
+					@apply rounded-md aspect-square grid place-items-center;
+					border : 1px solid var(--hierarchy-0);
+					
+					width: 3rem;
+					stroke: currentColor;
+
+					transition: background-color .3s, border-color .3s;
+				}
+				& > li:hover {
+					& {
+						background-color: var(--icon-color);
+						border-color: var(--panel-color);
+					}
+
+					& > svg {
+						filter: invert(1);
+					}
+				}
+			}
+
+			&:hover .c-sec-links {
+				translate : 0 0rem;
+				opacity : 1;
+			}
+			& .c-sec-links {
+				& {
+					translate : 0 -2rem;
+					opacity : 0;
+
+					transition: translate .3s, opacity .3s;
+					
+					position: absolute;
+					top: .5rem;
+					left : .5rem;
+					display: flex;
+					gap : .5rem;
+				}
+
+				& > a {
+					display: flex;
+					align-items: center;
+					background-color: var(--bg-card-project);
+					padding-inline: .5rem;
+					border-radius: 50%;
+					aspect-ratio: 1;
+				}
+
+				& > a:hover { background-color: var(--hierarchy-2); }
+				
+			}
+		}
+	}
+</style>

@@ -1,9 +1,17 @@
 ---
+import { screen_themes } from "../util/constants";
 interface Props {
 	title: string;
+	description : string,
+	thumbnail? : string,
 }
 
-const { title } = Astro.props;
+const { 
+	title,
+	description,
+	thumbnail = "",
+} = Astro.props;
+
 ---
 
 <!doctype html>
@@ -14,16 +22,47 @@ const { title } = Astro.props;
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		
+		<script define:vars={{ screen_themes }}>
+			(function(){
+				const theme = localStorage?.getItem("theme") ? 
+					localStorage.getItem("theme") : window.matchMedia("(prefers-color-scheme: dark)").matches? 
+						screen_themes.d : screen_themes.l;
+										
+				document.documentElement.classList.toggle("dark", theme === screen_themes.d);
+				window.localStorage.setItem("theme", theme);
+			})();
+		</script>
+
+		<!-- Primary Meta Tags -->
 		<title>{title}</title>
+		<meta name="title" content={title} />
+		<meta name="description" content={description} />
+
+		<!-- Open Graph / Facebook -->
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content="https://midu.dev/" />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:image" content={thumbnail} />
+
+		<!-- Twitter -->
+		<meta property="twitter:card" content="summary_large_image" />
+		<meta property="twitter:url" content="https://midu.dev/" />
+		<meta property="twitter:title" content={title} />
+		<meta property="twitter:description" content={description} />
+		<meta property="twitter:image" content={thumbnail} />
+
+		<!-- Meta Tags Generated with https://metatags.io, thank you for this awesome tool -->
+		<slot name="head-tag"/>
 	</head>
-	<body class="bg-zinc-700">
-		<div id="frame" class="h-screen">
+	<body>
 			<slot />
-		</div>
 	</body>
 </html>
 <style is:global>
 	:root {
+		color-scheme: light dark;
+
 		--accent: 136, 58, 234;
 		--accent-light: 224, 204, 250;
 		--accent-dark: 49, 10, 101;
@@ -31,9 +70,42 @@ const { title } = Astro.props;
 	}
 	html {
 		font-family: system-ui, sans-serif;
-		color : white;
 		background-size: 224px;
+		
+		scroll-behavior: smooth;
+		color : var(--hierarchy-0); 
 	}
+	body {
+		background-color: var(--bg-body);
+	}
+
+	html:not(.dark) {
+		--hierarchy-s : black;
+		--hierarchy-0 : theme(colors.gray.900);
+		--hierarchy-1 : theme(colors.gray.600);
+		--hierarchy-2 : theme(colors.slate.500);
+		--hierarchy-3 : theme(colors.slate.400);
+
+		--bg-body : theme(colors.zinc.200);
+		--panel-color : theme(colors.slate.300)
+	}
+	html.dark { 
+		--hierarchy-s : white;
+		--hierarchy-0 : theme(colors.slate.100);
+		--hierarchy-1 : theme(colors.slate.400);
+		--hierarchy-2 : theme(colors.slate.500);
+		--hierarchy-3 : theme(colors.zinc.700);
+
+		--bg-body : theme(colors.zinc.800);
+		--panel-color : #080d10; 
+	}
+
+	html.dark body {
+		background-image: radial-gradient(circle at 50% -4rem, #5562, transparent 75%);
+		background-attachment: fixed;
+	}
+	
+
 	code {
 		font-family:
 			Menlo,
@@ -44,5 +116,52 @@ const { title } = Astro.props;
 			Bitstream Vera Sans Mono,
 			Courier New,
 			monospace;
+	}
+</style>
+<style is:global data-behaviour>
+	*:target::before {
+		content: "";
+		display: block;
+		height: 4rem; /* fixed header height*/
+		margin: -4rem 0 0; /* negative fixed header height */
+	}
+</style>
+<style is:global data-elements>
+	.btn {
+		& {
+			@apply inline-block leading-none text-sm font-medium rounded-lg;
+
+			padding : .5rem 1rem;
+
+			border : 1px solid var(--fg-color);
+			background-color:  var(--bg-color);
+		}
+	}
+	html:not(.dark) .btn {
+		& {
+			--fg-color: theme(colors.gray.400);
+			--bg-color: theme(colors.gray.200);
+		}
+
+		&:where(:hover, :focus):not(:active) { 
+			--bg-color: theme(colors.gray.300);
+		}
+		&:active {
+			--bg-color: theme(colors.gray.400);
+			--fg-color: theme(colors.gray.400);
+		}
+	}
+	html.dark .btn {
+		& {
+			--bg-color: theme(colors.gray.800);
+			--fg-color: theme(colors.gray.600);
+		}
+
+		&:where(:hover, :focus):not(:active) {
+			--bg-color: theme(colors.gray.700);
+		}
+		&:active {
+			--bg-color: theme(colors.gray.900);
+		}
 	}
 </style>

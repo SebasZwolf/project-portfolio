@@ -4,149 +4,17 @@ export type Props = {
 };
 const { header_size = "calc(100vh - 4rem)" } = Astro.props;
 
-const home_links : {
-	label : string,
-	href : string
-}[] = [
-	{
-		label : 'Sobre mí',
-		href : '#',
-	},
-	{
-		label : 'Proyectos',
-		href : '#',
-	},
-	...Array(4).fill({
-		label : 'link',
-		href : '#'
-	}),
-	{
-		label : 'Contáctame',
-		href : '#',
-	},
-];
----
+import Header from '../fragments/Header.astro';
+--- 
 
-<div class="c-gen-grid h-[200vh]">
-	<header
-		class="c-gen-header sticky leading-none" 
-		style={`--hsize : ${header_size}`}
-	>
-		<div class="h-[50vh] mb-[-50vh]">
-			<svg width='100%' height='100%' xmlns='http://www.w3.org/2000/svg'>
-				<defs>
-					<pattern id='a' patternUnits='userSpaceOnUse' width='25' height='25' patternTransform='scale(4) rotate(0)'>
-						<path d='M25 30a5 5 0 110-10 5 5 0 010 10zm0-25a5 5 0 110-10 5 5 0 010 10zM0 30a5 5 0 110-10 5 5 0 010 10zM0 5A5 5 0 110-5 5 5 0 010 5zm12.5 12.5a5 5 0 110-10 5 5 0 010 10z' 
-							stroke-width='1' stroke='none' fill='var(--bg-colour)'/>
-						<path d='M0 15a2.5 2.5 0 110-5 2.5 2.5 0 010 5zm25 0a2.5 2.5 0 110-5 2.5 2.5 0 010 5zM12.5 2.5a2.5 2.5 0 110-5 2.5 2.5 0 010 5zm0 25a2.5 2.5 0 110-5 2.5 2.5 0 010 5z'  
-							stroke-width='1' stroke='none' fill='var(--bg-colour)'/>
-					</pattern>
-					<radialGradient id="comment-gradient" cx="0" cy=".5" r=".5">
-						<stop offset="0%" stop-color="rgba(255,255,255,.8)"></stop>
-						<stop offset="100%" stop-color="rgba(255,255,255,0)"></stop>
-					</radialGradient>
-				</defs>
-
-				<rect width='200%' height='100%' style="animation: slide-left 30s linear 0s infinite normal none; filter: blur(8px)" fill='url(#a)' />
-				
-				<g style="animation: moon-orbit 30s ease-in-out -6s infinite normal none;">
-					<!-- <circle cx="0" cy="0" r="64" fill="red"/> -->
-					<g style="translate: 0 25%; scale : .15">
-						<circle r="96" cx="0" y="0" fill="#dddf" style="filter : blur(96px)"/>
-						<circle r="96" cx="0" y="0" fill="#ddda" style="filter : blur(4px)"/>
-						<circle r="96" cx="0" y="0" fill="#ddda" style="filter : blur(1px)"/>
-						<circle r="96" cx="0" y="0" fill="#dddf" style="filter : blur(0px)"/>
-
-						<g style="opacity: .5">
-							<circle r="10" cx="-48" cy="-48" fill="#aabf"/>
-							<circle r="16" cx="64" cy="32" fill="#aabf"/>
-							<circle r="24" cx="28" cy="60" fill="#aabf"/>
-							<circle r="16" cx="0" cy="70" fill="#aabf"/>
-						</g>
-					</g>
-				</g>
-
-				{Array.from(Array(3).keys(), i => 
-					<g style={`rotate : ${-135 + 155 * i}deg; translate : ${15 + i * 35}% 50%;`}>
-						<ellipse rx="150" ry="2" cx="0" cy="0" fill="url('#comment-gradient')"
-							style={`animation: comet 7s ease-out ${i * -4}s infinite normal none;`}
-							/>
-					</g>
-				)}
-			</svg>
-		</div>
-
-		<div class="frame relative">
-			<section
-				class="c-gen-banner grid place-items-center"
-				class:list={[!header_size && "hidden"]}
-			>
-				<slot name="header">
-					<article
-						class="border-blue-400 p-2 flex flex-col items-center gap-2 max-w-2xl b mx-auto"
-					>
-						<header class="text-center my-3">
-							<picture>
-								<img
-									class="w-24 block mx-auto my-2 rounded-full overflow-clip border-2 border-opacity-50 border-white p-1"
-									src={"https://unavatar.io/unknown"}
-									width="112"
-									height="112"
-									alt="foto del avatar del desarrollador"
-								/>
-							</picture>
-							<h2 class="m-0 text-base font-semibold leading-tight">
-								<span> hola, soy</span>
-								<span class="text-xl font-bold"> Sebastian</span>
-							</h2>
-							<p class="text-sm m-0 leading-tight text-gray-400">
-								Ingernierio de Sistemas y Desarrollador Web
-							</p>
-						</header>
-						<div
-							class="basis-full leading-snug text-base text-center text-balance"
-						>
-							<p class="my-1">
-								Soy un entusiasta del desarrollo web, el diseño UX y las aplicaciones web.
-							</p>
-							<p class="my-1">
-								Me especializo en el desarrollo front-end (el diseño y la
-								interacción con usuario) y la planeación del back-end (la lógica
-								de negocio).
-							</p>
-						</div>
-					</article>
-				</slot>
-			</section>
-			<hr class="mx-auto w-3/4 border-none text-slate-400 bg-transparent" style="height: 1px; margin-top: -1px; background-image: linear-gradient(to right, #0000, currentColor, currentColor, #0000)"/>
-			<nav class="h-16 flex flex-col justify-center">
-				<slot name="nav">
-					<div
-						class="px-6 flex h-12 gap-2 items-stretch justify-center text-slate-400 sticky top-0"
-					>
-						<ul class="flex gap-2">
-							{
-								home_links.map(l => (
-									<li>
-										<a class="h-full flex items-center px-3 hover:text-white" href={l.href}>{l.label}</a>
-									</li>
-								))
-							}
-						</ul>
-					</div>
-				</slot>
-			</nav>
-		</div>
-	</header>
-	<aside>
-		<slot name="aside">
-			aside
-		</slot>
-	</aside>
-	<main>
+<div class="c-gen-grid min-h-full">
+	<Header {header_size}>
+		<slot slot="header" name="header">header</slot>
+	</Header>
+	<main class="c-gen-main-flow">
 		<slot name="default" />
 	</main>
-	<footer>
+	<footer class="c-gen-footer" >
 		<slot name="footer"> footer</slot>
 	</footer>
 </div>
@@ -155,75 +23,48 @@ const home_links : {
 		display: grid;
 		grid-template-rows: auto auto 1fr auto;
 	}
-	.c-gen-header {
-		top: calc(var(--hsize, 0) * -1 - 1rem);
-		--bg-colour: #080d10;
 
-		background-color: var(--bg-colour);
-		background-image: url("/stars.png");
-		background-repeat: repeat-x;
-		background-size: 50% 50%;
+	.c-gen-main-flow {
+		& {
+			width: 100%;
+			margin-inline: auto;
 
-		contain: paint;
-		animation: bg-slide-left 60s linear 0s infinite normal none;
-	}
+			display: grid;
 
-	@keyframes bg-slide-left {
-		to {
-			background-position-x: 100%;
+			--max-width: 100%;
+			--side-width : 6rem;
+
+			grid-template-columns: 
+				[total-start]
+					minmax(0px, 1fr)
+				[large-start]
+					minmax(0px, var(--side-width))
+				[short-start]
+					var(--max-width)
+				[short-end]
+					minmax(0px, var(--side-width))
+				[large-end]
+					minmax(0px, 1fr)
+				[total-start];
 		}
-	}
-	@keyframes slide-left {
-		from {
-			transform: translate(0%, 0);
+
+		& > * {
+			& 									{ grid-column: short; }
+			&[data-col="large"] { grid-column: large; }
+			&[data-col="total"] { grid-column: total; }
 		}
-		to {
-			transform: translate(-50%, 0);
-		}
-	}
-	@keyframes moon-orbit{
-		0%, 12% {
-			translate: 90% 0%;
-			rotate: -.30turn;
-			scale : .75;
-		}
-		50% {
-			scale : 1.15;
-		}
-		88%, 100% {
-			translate: 10% 0%;
-			rotate: .35turn;
-			scale : .75;
-		}
-	}
-	@keyframes comet {
-		0%, 42% {
-			translate: 50% 0;
-			opacity: 0;
-		}
-		50% { 
-			opacity: 1;
-		}
-		58%, 100% {
-			translate: -50% 0;
-			opacity: 0;
-		}
+		
+		@media (width > 0768px){ --max-width: 0768px; }
+		@media (width > 0992px){ --max-width: 0992px; }
+		@media (width > 1200px){ --max-width: 1200px; }
 	}
 
-	.c-gen-header > div.frame {
-		background-image: linear-gradient(
-			to bottom,
-			transparent 4rem,
-			theme(colors.slate.700)
-		);
-		background-attachment: fixed;
-	}
-	.c-gen-banner {
-		height: var(--hsize, 0);
-		overflow: clip;
-	}
+	.c-gen-footer {
+		& {
+			margin-top : auto;
+			padding : 1rem;
+			background-color: var(--panel-color);
 
-	none {
-		background-image: url("data:image/svg+xml,<svg id='patternId' width='100%' height='100%' xmlns='http://www.w3.org/2000/svg'><defs><pattern id='a' patternUnits='userSpaceOnUse' width='20' height='20' patternTransform='scale(10) rotate(0)'><rect x='0' y='0' width='100%' height='100%' fill='hsla(0, 0%, 100%, 0)'/><path d='M0 0h10v10H0z'  stroke-width='1' stroke='none' fill='hsla(0, 0%, 0%, 1)'/><path d='M10 10h10v10H10z'  stroke-width='1' stroke='none' fill='hsla(0, 0%, 0%, 1)'/></pattern></defs><rect width='800%' height='800%' transform='translate(-400,-400)' fill='url(%23a)'/></svg>");
+		}
 	}
 </style>
