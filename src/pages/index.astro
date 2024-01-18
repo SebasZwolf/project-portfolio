@@ -86,13 +86,13 @@ let c = 0;
 
 		<Fragment slot="default">
 			<svg viewBox="0 0 24 24" class="hidden">
-				<defs>
+				<defs data-namespace="tag-icons">
 					<g id={`c-icon-tag-${icons.vue.icon}`} stroke-width="2" fill="none">
 						<path d="M16.5 4l-4.5 8l-4.5 -8" />
 						<path d="M3 4l9 16l9 -16" />
 					</g>
 				</defs>
-				<defs>
+				<defs data-namespace="header-icons">
 					<g id={`c-icon-header-${s[c++].id}`}
 						stroke-width="0"
 						stroke="none"
@@ -204,7 +204,7 @@ let c = 0;
 				}</ul>
 			</section>
 			<section class="my-12" data-col="total">
-				<div class="max-w-[var(--max-width)] mx-auto">
+				<div class="max-w-[var(--max-width)] mx-auto px-2">
 					<h2 id={s[c].id } class="text-2xl block my-4 font-semibold leading-none">
 						<svg
 							class="inline-block size-7"
@@ -240,8 +240,8 @@ let c = 0;
 
 					</div>
 				</div>
+
 			</section>
-			<div class="mb-64"></div>
 		</Fragment>
 	</Grid>
 </Layout>
