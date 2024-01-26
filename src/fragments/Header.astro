@@ -184,8 +184,8 @@ const { header_size } = Astro.props;
 			<div>
 				<label class="c-gen-nav-toggler">
 					<input type="checkbox" aria-hidden="true" class="sr-only"/>	
-					<svg class="c-tool-icon" data-toggle="open" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 6l16 0" /><path d="M4 12l16 0" /><path d="M4 18l16 0" /></svg>
-					<svg class="c-tool-icon" data-toggle="shut" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M18 6l-12 12" /><path d="M6 6l12 12" /></svg>
+					<svg class="c-tool-icon" data-toggle="open" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 6l16 0" /><path d="M4 12l16 0" /><path d="M4 18l16 0" /></svg>
+					<svg class="c-tool-icon" data-toggle="shut" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M18 6l-12 12" /><path d="M6 6l12 12" /></svg>
 				</label>
 
 				<div class="c-gen-frame-links">
@@ -281,6 +281,7 @@ const { header_size } = Astro.props;
 	.c-gen-nav {
 		& {
 			@apply h-16 flex flex-col justify-center;
+			--emphasis : #89d8;
 		}
 
 		& > div {
@@ -302,7 +303,6 @@ const { header_size } = Astro.props;
 				background-color: #6663;
 				color: var(--hierarchy-1);
 
-				--emphasis : #46f8;
 			}
 
 			& a, label {
@@ -319,7 +319,7 @@ const { header_size } = Astro.props;
 				}
 
 				&:hover, &:focus-within { 
-					background-color: #89d8;
+					background-color: var(--emphasis);
 					color : var(--hierarchy-0);
 					transition: 
 						background-color .3s,
@@ -340,32 +340,32 @@ const { header_size } = Astro.props;
 		}
 
 		& .c-gen-theme-toggler { 
-			@apply aspect-square leading-none self-center border-2 rounded-full flex items-center justify-center;
-
-			width: 34px;
-			border-color: var(--hierarchy-2);
-			background-color: #6676
+			@apply w-9 aspect-square rounded-full
+				self-center flex items-center justify-center
+				leading-none
+				border border-[var(--emphasis)] active:border-hierarchy-3
+				hover:bg-[var(--emphasis)] active:bg-hierarchy-3;
 		}
 
 		& .c-gen-nav-toggler {
 			& {
-				@apply aspect-square leading-none self-center px-2 border-2 rounded-md flex items-center;
-				border-color: var(--hierarchy-2);
-				background-color: #6676;
-			}
-			&:has(> input[type="checkbox"]:not(:checked)) {
-				& > .c-tool-icon[data-toggle="shut"] { display: none; }
-			}
-			&:has(> input[type="checkbox"]:checked) {
-				& > .c-tool-icon[data-toggle="open"] { display: none; }
+				@apply aspect-square px-2 rounded-md
+				flex self-center items-center
+				leading-none 
+				border border-[var(--emphasis)] active:border-hierarchy-3
+				hover:bg-[var(--emphasis)] active:bg-hierarchy-3;
 			}
 
-			@media (width <= 798px) {
+			&:has(> input[type="checkbox"]:not(:checked)) > .c-tool-icon[data-toggle="shut"] { display: none; }
+			&:has(> input[type="checkbox"]:checked) 			> .c-tool-icon[data-toggle="open"] { display: none; }
+			
+
+			@media (width <= 768px) {
 				& { order: 1; }
 				&:has(> input[type="checkbox"]:not(:checked)) + .c-gen-frame-links { display: none; }
 			}
 			
-			@media (width > 798px) {
+			@media (width > 768px) {
 				& { display: none; }
 			}
 		}
