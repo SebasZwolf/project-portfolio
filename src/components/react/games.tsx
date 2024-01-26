@@ -1,17 +1,18 @@
 import styles from "./index.module.css"
-import { useMemo, useState, useEffect, useRef } from "react";
+import { useMemo, useState, useEffect, useRef, type ReactNode } from "react";
 
-import { type p_base, Title } from "./fundamental.tsx";
+import { Title } from "./fundamental.tsx";
 
 type p_TicTacToe = {
-	level?: number
-} & p_base;
+	level?: number;
+	children? : ReactNode;
+};
 enum e_ttt {
 	null,
 	x,
 	o,
 };
-export function TicTacToe({ level = 1 }: p_TicTacToe = {}) {
+export function TicTacToe({ level = 1 } : p_TicTacToe = {}) {
 	type p_Cell = {
 		v: e_ttt,
 		i: number,

@@ -1,9 +1,9 @@
-import { createElement as h, useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { createElement as h, useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import styles from "./index.module.css"
 
 export * from './fundamental.tsx';
 
-import { Title, type p_Title, type p_base } from './fundamental.tsx';
+import { Title, type p_Title } from './fundamental.tsx';
 
 type p_TimeLine = {
   list : Array<{
@@ -14,7 +14,8 @@ type p_TimeLine = {
   }>;
 
   title? : p_Title;
-} & p_base;
+	children? : ReactNode;
+} & Record<string, unknown>;
 
 export function TimeLine({ title = { level : 3 }, list, className, children, ...attrs } : p_TimeLine) {
   return (
@@ -22,6 +23,7 @@ export function TimeLine({ title = { level : 3 }, list, className, children, ...
       {list.map((e, i) => <li key={i} value={i} data-index={i}>
         <div className="dot" role="img"></div>
         <time dateTime={e.date.toISOString()}>{e.date.toLocaleString('es-pe', { month : 'long', year : 'numeric' })}</time>
+        
         <Title className="title" level={title.level}>{e.title}</Title>
         
         <p className="content">{Array.isArray(e.content) ? e.content.flatMap(v => [v,<br/>]) : e.content }</p>
