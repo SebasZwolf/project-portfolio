@@ -1,0 +1,9 @@
+{
+  "title": "Aplicación de análisis de bonos",
+  "descr": "Creado como un proyecto universitario, esta aplicación permite al usuario comprar la rentabilidad de multiples bonos. Debido a cambios en la politica de uso de proveedores cloud, los servicios que requieren iniciar sesion ya no estan disponibles.",
+  "link": "https://sebaszwolf.github.io/calculator",
+  "img": "bondCalculator.png",
+  "tags": [
+    "vue", "ts"
+  ]
+}

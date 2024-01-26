@@ -1,0 +1,10 @@
+{
+  "title": "Aplicación para modelar mockups de web",
+  "link": "https://sebaszwolf.github.io/mockup-modeler/",
+  "repo": "https://github.com/SebasZwolf/mockup-modeler/",
+  "descr": "Herramienta web local que permite al usuario crear un mockup simple del flujo de contenido utilizando una interfaz simplificada.",
+  "img": "mockupEditor.webp",
+  "tags": [
+    "vue", "ts"
+  ]
+}
