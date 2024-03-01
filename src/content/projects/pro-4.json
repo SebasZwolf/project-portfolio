@@ -1,0 +1,10 @@
+{
+  "title": "Calculador de promedios",
+  "descr": "Herramienta simplificada para comprobar si aún se puede aprobar una matería, calcular el puntaje requerido para aprobarla (o estimar con notas hipoteticas).",
+  "repo": "https://github.com/SebasZwolf/grades-calculator",
+  "link": "https://sebaszwolf.github.io/grades-calculator/",
+  "img": "meanCalculator.webp",
+  "tags": [
+    "vue", "js", "css3"
+  ]
+}

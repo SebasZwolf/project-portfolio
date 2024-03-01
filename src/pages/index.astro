@@ -5,6 +5,7 @@ import Grid from "../layouts/Grid.astro";
 import Icons from "../fragments/Icons.astro";
 
 import { TimeLine } from "../components/react";
+import IconList from "../components/vue/IconList.vue";
 
 import { getCollection } from 'astro:content';
 import { Image } from "astro:assets";
@@ -24,12 +25,14 @@ const projects = await getCollection('projects').then(e => e.map(e => e.data));
 
 let c = 0;
 const imgAuthor = PhotoImg.src;
+
+const
+	title="Portafolio de Sebastian - Ingeniero de Sistemas y Desarrollador Web",
+	description="Hola soy Sebastian y este es mi portafolio. Mira mis proyectos realizados usando CSS,JS y HTML y diferentes tecnologías como Vue, Astro, React, Tailwind, entre otros."
+
 ---
 
-<Layout
-	title="Portafolio de Sebastian - Ingeniero de Sistemas y Desarrollador Web"
-	description="Hola soy Sebastian y este es mi portafolio. Mira mis proyectos realizados usando CSS,JS y HTML y diferentes tecnologías como Vue, Astro, React, Tailwind, entre otros."
->
+<Layout {title} {description}>
 	<Grid>
 		<Fragment slot="header">
 			<article
@@ -37,14 +40,9 @@ const imgAuthor = PhotoImg.src;
 			>
 				<header class="text-center my-3">
 					<picture>
-						<Image
+						<Image width="96" height="96" src={ProfileIcon} format="webp"
 							class="w-24 block mx-auto my-2 rounded-full overflow-clip border-2 border-opacity-50 border-white p-1 mix-blend-luminosity"
-							src={ProfileIcon}
-							width="96"
-							height="96"
-							alt="avatar del desarrollador"
-							format="webp"
-						/>
+							alt="avatar del desarrollador"/>
 					</picture>
 					<h2 class="m-0 text-xl font-semibold leading-tight">
 						<span> hola, soy</span>
@@ -165,15 +163,8 @@ const imgAuthor = PhotoImg.src;
 										<p class="mb-2 leading-tight text-hierarchy-1">{p.descr}</p>
 									</div>
 								</div>
-								
-								<ul class="c-ul-project-tags">{p.tags.map(t =>
-									(<li class="block" style={`--icon-color: ${t.color}`}>
-										<svg width="24" height="24" >
-											<title>{t.label}</title>
-											<use href={`#c-icon-tag-${t.icon}`}/>
-										</svg>
-									</li>)
-								)}</ul>
+
+								<IconList icons={p.tags} class="p-1.5"/>
 							</div>
 						</article>
 					</li>))
@@ -222,17 +213,7 @@ const imgAuthor = PhotoImg.src;
 					<p class="my-4">
 						Estas son las tecnologías que uso para convertir ideas en <span class="bg-gradient-to-tr from-purple-500 to-cyan-400 bg-clip-text text-transparent font-semibold">experiencias</span>.
 					</p>
-					<ul class="flex flex-wrap gap-2 justify-center md:justify-end md:pl-48">
-						{
-							Object.values(icons).map( i => (<li style={`--icon-color: ${ i.color }`} class="transition-colors duration-300 p-3 rounded-md border border-current hover:text-panel hover:bg-[var(--icon-color)] hover:border-transparent">
-								<svg viewBox="0 0 24 24" width="28">
-									<title>{ i.label }</title>
-									<use stroke="currentcolor" href={`#c-icon-tag-${i.icon}`}/>	
-								</svg>	
-							</li>)
-							)
-						}
-					</ul>
+					<IconList icons={Object.values(icons)} class="p-3"/>
 				</section>
 
 			</section>
@@ -267,7 +248,6 @@ const imgAuthor = PhotoImg.src;
 			& {
 				@apply p-2 rounded-xl flex flex-col relative;
 				
-
 				height: 30rem;
 				overflow: clip;
 
@@ -281,33 +261,25 @@ const imgAuthor = PhotoImg.src;
 				& {
 					display: grid;
 					grid-template-rows: 0fr;
-					transition: grid-template-rows .3s;
+					transition: grid-template-rows .3s .05s;
 				}
-				& > div:only-child { overflow: hidden; }
+				& > div:only-child { 
+					overflow: hidden;
+					transition: opacity .3s;
+					opacity : 0;
+				}
 			}
 
-			&:hover div.collapsible  { grid-template-rows: 1fr; }
-
-			& .c-ul-project-tags {
+			&:hover div.collapsible  { 
 				& {
-					@apply flex flex-row flex-nowrap gap-2 items-start justify-end;
+					grid-template-rows: 1fr;
+					transition: grid-template-rows .3s;
 				}
 
-				& > li {
-					@apply rounded-md aspect-square grid place-items-center;
-					border : 1px solid var(--hierarchy-0);
-					
-					width: 3rem;
-					stroke: currentColor;
-
-					transition: background-color .3s, border-color .3s;
+				& > div:only-child { 
+					transition: opacity .3s .1s;
+					opacity : 1;
 				}
-				
-				& > li:hover {
-					background-color: var(--icon-color);
-					border-color: var(--panel-color);
-				}
-				& > li:hover > svg { filter: invert(1); }
 			}
 
 			&:hover .c-sec-links {

@@ -2,6 +2,7 @@
   "title": "Blog de diseño web y otras curiosidades",
   "descr": "Blog personal creado integrando un CSM (StaticCMS). En este blog se encuentran trucos y practicas de diseño web y tutoriales básicos. Por ejemplo, aquí explico como se diseñó este portafolio",
   "repo": "https://github.com/SebasZwolf/litle-blog",
+  "link": "https://sebaszwolf.github.io/little-blog/",
   "img": "recipesBlog.webp",
   "tags": [
     "astro", "static", "css3"
