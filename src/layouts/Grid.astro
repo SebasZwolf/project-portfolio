@@ -5,6 +5,7 @@ export type Props = {
 const { header_size = "calc(100vh - 4rem)" } = Astro.props;
 
 import Header from '../fragments/Header.astro';
+
 --- 
 
 <div class="c-gen-grid min-h-full">
@@ -15,7 +16,14 @@ import Header from '../fragments/Header.astro';
 		<slot name="default" />
 	</main>
 	<footer class="c-gen-footer" >
-		<slot name="footer"> footer</slot>
+		<!-- <slot name="footer"> footer</slot> -->
+		<div class="c-gen-main-flow ">
+			
+			<p style="font-size: small;">
+				Página construida por Mí :D<br>
+				<small>&copy; Derechos Reservados.</small>
+			</p>
+		</div>
 	</footer>
 </div>
 <style is:global>

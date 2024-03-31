@@ -1,0 +1,10 @@
+{
+  "title": "MonkeyType Clone",
+  "descr": "Clon del popular juego MonkeyType. Juego de telcado que reta al jugador a escribir rapida y correctamente el texto en pantalla.",
+  "repo": "https://github.com/SebasZwolf/pro-monkey-clone",
+  "link": "https://sebaszwolf.github.io/pro-monkey-clone/",
+  "img": "monkeyClone.webp",
+  "tags": [
+    "vue", "js", "css3"
+  ]
+}
