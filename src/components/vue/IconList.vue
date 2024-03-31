@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { useSlots, type PropType } from 'vue';
+import { type PropType } from 'vue';
 
 import { icons } from '../../util/const';
 type t_icon = typeof icons[keyof typeof icons];
@@ -12,7 +12,8 @@ defineOptions({
 const p = defineProps({
 	icons : {
 		type : Array as PropType<t_icon[]>
-	}
+	},
+	// class : null,
 });
 
 
