@@ -17,7 +17,7 @@ const projects = defineCollection({
 		img: z.string().transform(s => pro_img_folder.concat(s)).pipe(image()),
 		tags : z.string()
 			.refine(e => tagarr.has(e as k_tags), e => ({ message : `'${e}' tag not recognized` }))
-			.array().transform(a => a.map(e => tags[e as k_tags])),
+			.array().transform(a => a.map(e => tags[e as k_tags] )),
 	})
 });
 

@@ -4,7 +4,7 @@ import Grid from "../layouts/Grid.astro";
 
 import Icons from "../fragments/Icons.astro";
 
-import { TimeLine } from "../components/react";
+import { TimeLine } from "../components/react/TimeLine";
 import IconList from "../components/vue/IconList.vue";
 
 import { getCollection } from 'astro:content';
@@ -100,8 +100,8 @@ const
 			<section class="my-12 px-2">
 				<h2 id={s[(c = 0)].id} class="text-2xl block my-4 font-semibold leading-none">
 					<svg
-						class="inline-block size-7"
-						style="vertical-align: -5px;"
+						class="inline-block size-6"
+						style="vertical-align: -3px;"
 						viewBox="0 0 24 24">
 						<use href={`#c-icon-header-${s[c].id}`}/>
 					</svg>
@@ -111,7 +111,7 @@ const
 				<div class="mr-auto max-w-3xl pl-3">
 					<TimeLine
 						className="c-timeline-experience"
-						title={{ level : 3}}
+						title={{ level : 3 }}
 						list={[
 							{
 								date: new Date("2023-9"),
@@ -129,42 +129,59 @@ const
 			<section class="my-12 px-2">
 				<h2 id={s[c].id} class="text-2xl block my-4 font-semibold leading-none">
 					<svg
-						class="inline-block size-7"
-						style="vertical-align: -5px;"
+						class="inline-block size-6"
+						style="vertical-align: -3px;"
 						viewBox="0 0 24 24">
 						<use href={`#c-icon-header-${s[c].id}`}/>
 					</svg>
 					{ s[c++].label }
 				</h2>
-				<ul class="c-ul-project-list">{
-					projects.map(p => (<li class="">
-						<article class="bg-panel dark:bg-hierarchy-3 border border-hierarchy-3">
+				<ul 
+					class="grid gap-2 justify-center sm:justify-start"
+					style="
+						grid-auto-rows: 1fr;
+						grid-template-columns: repeat(auto-fit, 20rem);
+						">{
+					projects.map(p => (<li class="h-full">
+						<article class="
+						border border-hierarchy-3 h-96 flex flex-col
+						bg-panel my-0 dark:bg-hierarchy-3  flex-grow-0 flex-shrink-0 group rounded-md overflow-clip">
 
-							<div class="rounded-t-md overflow-clip aspect-square relative">
-								<div class="c-sec-links">
-									{ p.link && <a class="shadow-md shadow-black/40 bg-panel hover:bg-hierarchy-3 dark:bg-hierarchy-3 dark:hover:bg-hierarchy-2" target="_blank" href={p.link}>
+							<div class="overflow-clip relative aspect-[1.41/1] flex-shrink-1">
+								<div class="absolute flex gap-2 p-2 -translate-y-1/2 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 z-10" style="transition: opacity .3s, transform .3s;">
+									{ p.link && <a class="p-1.5 rounded-full shadow-md shadow-black/40 bg-panel hover:bg-hierarchy-3 dark:bg-hierarchy-3 dark:hover:bg-hierarchy-2" target="_blank" href={p.link}>
 										<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-external-link" width="20" height="20" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 6h-6a2 2 0 0 0 -2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-6" /><path d="M11 13l9 -9" /><path d="M15 4h5v5" />
 											</svg>
 										</a>	}
-									{ p.repo && <a class="shadow-md shadow-black/40 bg-panel hover:bg-hierarchy-3 dark:bg-hierarchy-3 dark:hover:bg-hierarchy-2" target="_blank" href={p.repo}>
+									{ p.repo && <a class="p-1.5 rounded-full shadow-md shadow-black/40 bg-panel hover:bg-hierarchy-3 dark:bg-hierarchy-3 dark:hover:bg-hierarchy-2" target="_blank" href={p.repo}>
 										<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="20" height="20" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
 											</svg>
 										</a>	}
 								</div>
-								<Image class="block h-full object-cover min-w-full" src={p.img} format="webp" alt={`captura/imagen de la aplicación/proyecto ${p.title}`}/>
-							</div>
-
-							
-							<div class="leading-none">
-								<h3 class="text-balance text-2xl leading-tight font-semibold my-4 flex items-end min-h-[3.75rem] text-hierarchy-0">{p.title}</h3>
 								
-								<div class="collapsible">
-									<div>
-										<p class="mb-2 leading-tight text-hierarchy-1">{p.descr}</p>
-									</div>
+								<Image class="block h-full object-cover min-w-full group-hover:opacity-50" style="transition: opacity .3s;" src={p.img} format="webp" alt={`captura/imagen de la aplicación/proyecto ${p.title}`}/>
+							</div>
+							
+							<footer class="px-2">
+								<ul class="ul-tag-list-lite mt-3">{
+									p.tags.map(t => (
+									<li style={`--icon-color : ${t.color}`}>
+										<svg><use href={`#c-icon-tag-${t.icon}`}/></svg>
+										<div>
+											<span class="text-nowrap">
+												{t.label}
+											</span>
+										</div>
+									</li>))
+								}</ul>	
+							</footer>
+							
+							<div class="leading-none text-sm px-2">
+								<h3 class="text-balance text-2xl leading-tight font-semibold my-2 flex items-end min-h-[3.75rem] text-hierarchy-0">{p.title}</h3>
+								
+								<div class="grid overflow-hidden grid-rows-[0fr] group-hover:grid-rows-[1fr] group-hover:mb-6" style="transition: grid-template-rows .3s, margin-bottom .3s;">
+									<p class="leading-tight text-hierarchy-1 overflow-hidden">{p.descr}</p>
 								</div>
-
-								<IconList icons={p.tags} class:list={['p-1.5']}/>
 							</div>
 						</article>
 					</li>))
@@ -174,8 +191,8 @@ const
 				<div class="max-w-[var(--max-width)] mx-auto px-2">
 					<h2 id={s[c].id } class="text-2xl block my-4 font-semibold leading-none">
 						<svg
-							class="inline-block size-7"
-							style="vertical-align: -5px;"
+							class="inline-block size-6"
+							style="vertical-align: -3px;"
 							viewBox="0 0 24 24">
 							<use href={`#c-icon-header-${s[c].id}`}/>
 						</svg>
@@ -231,83 +248,47 @@ const
 			color: transparent;
 		}
 	}
-	.c-ul-project-list {
+
+	ul.ul-tag-list-lite {
 		& {
-			@apply grid justify-center gap-2;
-			grid-template-columns: repeat(auto-fill, minmax(22rem, 1fr));
-			grid-auto-rows: min-content;
+			display: flex;
+			padding: 0;
+			list-style: none;
+			gap: .25rem;
 		}
 
 		& > li {
-			max-width: 30rem;
-			justify-self: center;
+			line-height: 1;
+			color: var(--hierarchy-s);	
+			padding: .25rem;
+			background-color: color-mix(in srgb, var(--icon-color), transparent 50%);
+			
+			border-radius: 100vw;
+			font-size: small;
+
+			display: flex;
+			align-items: center;
+		}
+		& > li > svg {
+			width: 16px;
+			aspect-ratio: 1;
 		}
 
-
-		& > li > article {
-			& {
-				@apply p-2 rounded-xl flex flex-col relative;
-				
-				height: 30rem;
-				overflow: clip;
-
-				box-shadow: 0 .5rem 1.5rem -.5rem #0006;
-			}
-			& > div { overflow: hidden; }
-			& > div:first-child { flex: 0 1 100%; }
-			& > div:last-child  { flex: 1 0 auto; }
-
-			& div.collapsible  { 
-				& {
-					display: grid;
-					grid-template-rows: 0fr;
-					transition: grid-template-rows .3s .05s;
-				}
-				& > div:only-child { 
-					overflow: hidden;
-					transition: opacity .3s;
-					opacity : 0;
-				}
-			}
-
-			&:hover div.collapsible  { 
-				& {
-					grid-template-rows: 1fr;
-					transition: grid-template-rows .3s;
-				}
-
-				& > div:only-child { 
-					transition: opacity .3s .1s;
-					opacity : 1;
-				}
-			}
-
-			&:hover .c-sec-links {
-				translate : 0 0rem;
-				opacity : 1;
-			}
-			& .c-sec-links {
-				& {
-					translate : 0 -2rem;
-					opacity : 0;
-
-					transition: translate .3s, opacity .3s;
-					
-					position: absolute;
-					top: .5rem;
-					left : .5rem;
-					display: flex;
-					gap : .5rem;
-				}
-
-				& > a {
-					display: flex;
-					align-items: center;
-					padding-inline: .5rem;
-					border-radius: 50%;
-					aspect-ratio: 1;
-				}				
-			}
+		& > li > div {
+			display: grid;
+			transition: grid-template-columns .3s, padding-inline .3s;
+			grid-template-columns: 0fr;
+			overflow: hidden;
+		}
+		& > li:hover > div {
+			grid-template-columns: 1fr;
+			padding-inline: .25rem;
+		}
+		& > li > div > span {
+			overflow: hidden;
+			line-height: 1.25;
+			text-transform: lowercase;
 		}
 	}
+
 </style>
