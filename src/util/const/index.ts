@@ -58,5 +58,10 @@ export const icons = {
 		icon : 'node',
 		label : 'NodeJS',
 		color : '#339933',
+	},
+	socketio : {
+		icon : 'socketio',
+		label : 'Socket.io',
+		color : 'var(--hierarchy-0)'
 	}
 } as const satisfies Record<string, { icon: string, label: string, color: string }> ;

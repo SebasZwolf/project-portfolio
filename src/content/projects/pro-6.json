@@ -1,0 +1,10 @@
+{
+  "title": "Infinite Tic Tac Toe",
+  "descr": "Una adaptación web multijugador del juego Tic Tac Toe con un giro especial. Ahora cada jugador debe  cuidar donde pone cada ficha, antes de descuidar su posición.",
+  "repo": "https://github.com/SebasZwolf/pro-infinite-tic-tac-toe",
+  "link": "https://sebaszwolf.github.io/pro-infinite-tic-tac-toe/",
+  "img": "infiniteTicTackToe.webp",
+  "tags": [
+    "react", "ts", "socketio"
+  ]
+}
