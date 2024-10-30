@@ -26,7 +26,7 @@ export function TimeLine({ title = { level : 3 }, list, className, children, ...
         
         <p className="content">{Array.isArray(e.content) ? e.content.flatMap(v => [v,<br/>]) : e.content }</p>
         {e.link && (
-          <a href={e.link} className="btn">ver más</a>
+          <a href={e.link} target='_blank'  className="btn">ver más</a>
         )}
       </li>)}       
     </ol>

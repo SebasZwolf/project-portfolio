@@ -114,13 +114,34 @@ const
 						title={{ level : 3 }}
 						list={[
 							{
-								date: new Date("2023-9"),
+								date: new Date("2023-10-01"),
 								title: "Human Habitat Peru",
 								content: [
 									"Diseño, puesta en marcha y mantenimiento de sitio web de Human Habitat Perú.",
 									"Se desarrolló una landing page que cumple con estandares de SEO y buenas practicas, un blog y sistema de contacto. Además, se diseño una base de datos estructurada local."
 								],
 								link: "https://hhpbim.com",
+							}, {
+								date: new Date("2024-08-01"),
+								title: "MARIN & ASSOCIATES",
+								content: [
+									"Desarrollo de herramientas web de gestión de documentos.",
+									"Se desarrollaron herramientas de gestión y manipulación de documentos.",
+									"Se desarrollaron de IA para agilizar procesos y desempeñar tareas de analizis, extracción y formateo.",
+									"Se implemento sistemas de búsqueda indexada para consulta de documentos.",
+									"Se diseño una interfaz amigable, accesible y personalizada para el uso de las herramientas mencionadas",
+								],
+							}, {
+								date: new Date("2024-09-01"),
+								title: "Chikichi Store",
+								content: [
+									"Actualmente en desarrollo",
+									"Desarrollo de sitio web y plataforma eCommerce.",
+									"Se diseño y desarrolló una sitio web de compras y blog.",
+									"Se desarrollo una plataforma de edición (administrador) para la gestión de articulos.",
+									"Se diseño una experiencia de usuario amigable, accesible y personalizada.",
+								],
+								link : 'https://test-product-762024.netlify.app'
 							}
 						]}
 					/>
@@ -138,16 +159,12 @@ const
 				</h2>
 				<ul 
 					class="grid gap-2 justify-center sm:justify-start"
-					style="
-						grid-auto-rows: 1fr;
-						grid-template-columns: repeat(auto-fit, 20rem);
-						">{
-					projects.map(p => (<li class="h-full">
-						<article class="
-						border border-hierarchy-3 h-96 flex flex-col
-						bg-panel my-0 dark:bg-hierarchy-3  flex-grow-0 flex-shrink-0 group rounded-md overflow-clip">
+					style="grid-auto-rows: 1fr; grid-template-columns: repeat(auto-fit, 20rem);">
+					{ projects.map(p => (<li class="h-full">
+						<article class="border border-hierarchy-3 h-96 flex flex-col bg-panel my-0 dark:bg-hierarchy-3  flex-grow-0 flex-shrink-0 group rounded-md overflow-clip">
 
 							<div class="overflow-clip relative aspect-[1.41/1] flex-shrink-1">
+								
 								<div class="absolute flex gap-2 p-2 -translate-y-1/2 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 z-10" style="transition: opacity .3s, transform .3s;">
 									{ p.link && <a class="p-1.5 rounded-full shadow-md shadow-black/40 bg-panel hover:bg-hierarchy-3 dark:bg-hierarchy-3 dark:hover:bg-hierarchy-2" target="_blank" href={p.link}>
 										<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-external-link" width="20" height="20" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 6h-6a2 2 0 0 0 -2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-6" /><path d="M11 13l9 -9" /><path d="M15 4h5v5" />
@@ -159,7 +176,9 @@ const
 										</a>	}
 								</div>
 								
-								<Image class="block h-full object-cover min-w-full group-hover:opacity-50" style="transition: opacity .3s;" src={p.img} format="webp" alt={`captura/imagen de la aplicación/proyecto ${p.title}`}/>
+								<div class="size-full contain-size">
+									<Image class="block object-cover size-full group-hover:opacity-50" style="transition: opacity .3s;" src={p.img} format="webp" alt={`captura/imagen de la aplicación/proyecto ${p.title}`}/>
+								</div>
 							</div>
 							
 							<footer class="px-2">
@@ -183,6 +202,7 @@ const
 									<p class="leading-tight text-hierarchy-1 overflow-hidden">{p.descr}</p>
 								</div>
 							</div>
+
 						</article>
 					</li>))
 				}</ul>
@@ -228,7 +248,7 @@ const
 				<section class="p-2 my-4 mb-12 mx-auto max-w-[var(--max-width)] text-center md:text-right">
 					<h3 class="font-semibold text-xl mb-4 leading-none">Mi <i>Stack</i></h3>
 					<p class="my-4">
-						Estas son las tecnologías que uso para convertir ideas en <span class="bg-gradient-to-tr from-purple-500 to-cyan-400 bg-clip-text text-transparent font-semibold">experiencias</span>.
+						Estas son las tecnologías que uso para convertir ideas en <span class="bg-gradient-to-tr from-purple-500 to-cyan-400 bg-clip-text text-transparent font-semibold">realidad</span>.
 					</p>
 					<IconList icons={Object.values(icons)} class:list={['p-3']}/>
 				</section>
@@ -247,6 +267,14 @@ const
 			background-clip: text;
 			color: transparent;
 		}
+		& li[data-index="2"] .title { 
+			/* background-image : linear-gradient(to bottom right,#5193ca,#27B887); */
+			background-color: rgb(247, 185, 93);
+			background-clip: text;
+			color: transparent;
+		}
+		
+		
 	}
 
 	ul.ul-tag-list-lite {
