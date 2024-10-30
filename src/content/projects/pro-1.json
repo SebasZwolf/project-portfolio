@@ -6,5 +6,6 @@
   "img": "mockupEditor.webp",
   "tags": [
     "vue", "ts"
-  ]
+  ],
+  "stars" : 2
 }

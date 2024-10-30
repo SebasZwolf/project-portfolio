@@ -21,7 +21,7 @@ const s = [
 	{ id : 'sobre-mi', label : 'Sobre mí' },
 ] satisfies Record<number, { id : string, label : string}>
 
-const projects = await getCollection('projects').then(e => e.map(e => e.data));
+const projects = await getCollection('projects').then(e => e.map(e => e.data).sort((a, b) => b.stars - a.stars));
 
 let c = 0;
 const imgAuthor = PhotoImg.src;
